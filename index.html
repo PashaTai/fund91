@@ -30,14 +30,14 @@
   --shadow-lg:0 12px 40px rgba(0,0,0,.1);
   --shadow-xl:0 20px 60px rgba(0,0,0,.15);
 }
-html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-size:16px;line-height:1.6}
+html{scroll-behavior:smooth;font-size:clamp(16px,1.1vw,20px)}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.6}
 
 /* ========== NAV ========== */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 1.25rem;height:56px;
+  padding:0 1.25rem;height:clamp(56px,4vw,72px);
   transition:background .3s,box-shadow .3s,backdrop-filter .3s;
 }
 .nav.solid{
@@ -47,7 +47,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);bac
   box-shadow:0 1px 0 var(--ink-06);
 }
 .nav-brand{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--ink)}
-.nav-brand img{width:28px;height:28px;border-radius:50%;transition:opacity .2s}
+.nav-brand img{width:clamp(28px,2vw,36px);height:clamp(28px,2vw,36px);border-radius:50%;transition:opacity .2s}
 .nav-brand span{font-weight:600;font-size:.8rem;letter-spacing:-.01em}
 .nav:not(.solid) .nav-brand span{color:#fff}
 .nav-links{display:flex;gap:.5rem;align-items:center}
