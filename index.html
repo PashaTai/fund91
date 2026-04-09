@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Фонд 91</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fafafa;
+  --surface:#ffffff;
+  --ink:#111111;
+  --ink-80:rgba(17,17,17,.8);
+  --ink-50:rgba(17,17,17,.5);
+  --ink-30:rgba(17,17,17,.3);
+  --ink-12:rgba(17,17,17,.1);
+  --ink-06:rgba(17,17,17,.05);
+  --accent:#1a56db;
+  --accent-hover:#1648b8;
+  --accent-light:rgba(26,86,219,.06);
+  --accent-mid:rgba(26,86,219,.15);
+  --radius:12px;
+  --radius-sm:8px;
+  --radius-xs:6px;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 16px rgba(0,0,0,.06);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.1);
+  --shadow-xl:0 20px 60px rgba(0,0,0,.15);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-size:16px;line-height:1.6}
+
+/* ========== NAV ========== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.25rem;height:56px;
+  transition:background .3s,box-shadow .3s,backdrop-filter .3s;
+}
+.nav.solid{
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  box-shadow:0 1px 0 var(--ink-06);
+}
+.nav-brand{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--ink)}
+.nav-brand img{width:28px;height:28px;border-radius:50%;transition:opacity .2s}
+.nav-brand span{font-weight:600;font-size:.8rem;letter-spacing:-.01em}
+.nav:not(.solid) .nav-brand span{color:#fff}
+.nav-links{display:flex;gap:.5rem;align-items:center}
+.nav-link{
+  font-size:.78rem;font-weight:500;color:var(--ink-50);
+  text-decoration:none;transition:color .2s;
+  padding:.4rem .6rem;border-radius:var(--radius-xs);
+  display:none;
+}
+.nav:not(.solid) .nav-link{color:rgba(255,255,255,.55)}
+.nav-link:hover{color:var(--ink)}
+.nav:not(.solid) .nav-link:hover{color:#fff}
+.nav-cta{
+  display:flex!important;
+  font-size:.75rem;font-weight:600;color:#fff!important;
+  background:var(--accent);padding:.45rem 1rem;
+  border-radius:999px;text-decoration:none;
+  letter-spacing:-.01em;
+  transition:all .2s;
+  box-shadow:0 1px 3px rgba(26,86,219,.25);
+}
+.nav-cta:hover{background:var(--accent-hover);box-shadow:0 2px 8px rgba(26,86,219,.35);transform:translateY(-1px)}
+
+/* ========== HERO ========== */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;align-items:flex-end;
+  padding:1.25rem;padding-top:72px;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('hero.jpg') center 30%/cover no-repeat;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.6) 40%,rgba(0,0,0,.35) 100%);
+}
+.hero-inner{
+  position:relative;z-index:2;width:100%;
+  max-width:1080px;margin:0 auto;
+  display:flex;flex-direction:column;gap:1.5rem;
+  padding-bottom:1.5rem;
+}
+.hero-text{color:#fff}
+.hero-label{
+  display:inline-flex;align-items:center;
+  font-size:.65rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.7);
+  margin-bottom:.75rem;
+  padding:.35rem .75rem;
+  background:rgba(255,255,255,.12);
+  border-radius:999px;
+  backdrop-filter:blur(10px);
+}
+.hero h1{
+  font-size:clamp(1.6rem,5vw,2.8rem);font-weight:700;line-height:1.15;
+  margin-bottom:.75rem;letter-spacing:-.03em;
+}
+.hero h1 em{font-style:italic;font-weight:400;color:rgba(255,255,255,.85)}
+.hero-desc{font-size:.88rem;font-weight:400;color:rgba(255,255,255,.75);line-height:1.7;max-width:440px}
+
+/* ========== DONATE CARD ========== */
+.dcard{
+  background:var(--surface);border-radius:var(--radius);
+  padding:1.5rem;
+  box-shadow:var(--shadow-xl);
+  width:100%;
+}
+.dcard-title{font-size:1.05rem;font-weight:700;margin-bottom:.15rem;letter-spacing:-.02em}
+.dcard-sub{font-size:.76rem;color:var(--ink-50);margin-bottom:1.2rem;font-weight:400}
+.dcard-freq{
+  display:grid;grid-template-columns:1fr 1fr;
+  background:var(--ink-06);border-radius:var(--radius-sm);
+  padding:3px;margin-bottom:1rem;
+}
+.dcard-freq button{
+  border:none;background:transparent;
+  font-family:inherit;font-size:.75rem;font-weight:600;
+  padding:.55rem;color:var(--ink-50);cursor:pointer;
+  transition:all .2s;border-radius:var(--radius-xs);
+  letter-spacing:-.01em;
+}
+.dcard-freq button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
+.dcard-amounts{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-bottom:.4rem}
+.dcard-amt{
+  border:1.5px solid var(--ink-12);border-radius:var(--radius-sm);
+  background:transparent;padding:.65rem;
+  font-family:inherit;font-size:.9rem;font-weight:600;
+  color:var(--ink);cursor:pointer;transition:all .15s;text-align:center;
+}
+.dcard-amt:hover{border-color:var(--accent-mid);background:var(--accent-light)}
+.dcard-amt.on{border-color:var(--accent);background:var(--accent-light);color:var(--accent)}
+.dcard-other{
+  width:100%;border:1.5px solid var(--ink-12);border-radius:var(--radius-sm);
+  padding:.65rem .85rem;font-family:inherit;font-size:.85rem;
+  color:var(--ink);outline:none;margin-bottom:1rem;
+  transition:border .2s;background:transparent;
+}
+.dcard-other:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
+.dcard-other::placeholder{color:var(--ink-30)}
+.dcard-go{
+  width:100%;border:none;border-radius:var(--radius-sm);
+  padding:.85rem;background:var(--accent);color:#fff;
+  font-family:inherit;font-size:.82rem;font-weight:600;
+  letter-spacing:-.01em;cursor:pointer;transition:all .2s;
+}
+.dcard-go:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,86,219,.3)}
+.dcard-fine{font-size:.64rem;color:var(--ink-30);text-align:center;margin-top:.8rem;line-height:1.6}
+.dcard-fine a{color:var(--ink-50);text-underline-offset:2px}
+
+/* ========== SECTIONS ========== */
+.sec{padding:3.5rem 1.25rem}
+.sec-inner{max-width:920px;margin:0 auto}
+.sec-label{
+  font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:.6rem;
+}
+.sec h2{
+  font-size:clamp(1.35rem,3vw,1.9rem);font-weight:700;
+  line-height:1.2;margin-bottom:.5rem;letter-spacing:-.03em;
+}
+.sec-sub{font-size:.85rem;color:var(--ink-50);font-weight:400;line-height:1.7;max-width:480px}
+
+/* ========== MISSION ========== */
+.mission{background:var(--surface)}
+.mission-body{
+  margin-top:2rem;
+  display:flex;flex-direction:column;gap:2rem;
+}
+.mission-text{font-size:.85rem;color:var(--ink-80);line-height:1.85;font-weight:400}
+.mission-text p+p{margin-top:.85rem}
+.mission-stats{
+  display:flex;flex-direction:column;gap:1.5rem;
+  padding-top:1.5rem;border-top:1px solid var(--ink-06);
+}
+.stat-num{font-size:2rem;font-weight:700;color:var(--accent);line-height:1;letter-spacing:-.04em}
+.stat-label{font-size:.7rem;color:var(--ink-50);margin-top:.3rem;font-weight:500}
+
+/* ========== PROGRAMS ========== */
+.prog-grid{
+  margin-top:2rem;display:flex;flex-direction:column;gap:1px;
+  background:var(--ink-06);border-radius:var(--radius);overflow:hidden;
+}
+.prog{background:var(--surface);padding:1.5rem;transition:background .2s}
+.prog:hover{background:var(--accent-light)}
+.prog h3{font-size:.88rem;font-weight:600;margin-bottom:.3rem;letter-spacing:-.01em}
+.prog p{font-size:.8rem;color:var(--ink-50);line-height:1.65;font-weight:400}
+
+/* ========== TRANSPARENCY ========== */
+.transparency{background:var(--surface)}
+.transp-grid{margin-top:2rem;display:flex;flex-direction:column;gap:.75rem}
+.transp-card{
+  background:var(--bg);border-radius:var(--radius-sm);padding:1.25rem 1.5rem;
+  border:1px solid var(--ink-06);transition:border-color .2s;
+}
+.transp-card:hover{border-color:var(--ink-12)}
+.transp-card h3{font-size:.85rem;font-weight:600;margin-bottom:.25rem;letter-spacing:-.01em}
+.transp-card p{font-size:.78rem;color:var(--ink-50);line-height:1.65;font-weight:400}
+
+/* ========== REQUISITES ========== */
+.req-inner{max-width:560px}
+.req-table{margin-top:1.5rem}
+.req-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.6rem 0;border-bottom:1px solid var(--ink-06);
+  gap:.5rem;
+}
+.req-k{font-size:.78rem;font-weight:600;color:var(--ink-80);flex-shrink:0}
+.req-right{display:flex;align-items:center;gap:.4rem;min-width:0}
+.req-v{font-size:.78rem;font-weight:400;color:var(--ink-50);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.req-copy{
+  flex-shrink:0;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;
+  border:none;background:transparent;border-radius:var(--radius-xs);
+  color:var(--ink-30);cursor:pointer;transition:all .15s;
+}
+.req-copy:hover{background:var(--ink-06);color:var(--ink-50)}
+.req-copy.copied{color:var(--accent)}
+.req-copy svg{width:14px;height:14px}
+.req-hint{
+  margin-top:1.2rem;
+  display:flex;align-items:flex-start;gap:.5rem;
+  font-size:.72rem;color:var(--ink-30);line-height:1.6;
+}
+.req-hint svg{flex-shrink:0;width:14px;height:14px;margin-top:2px;color:var(--ink-30)}
+
+/* ========== TAX ========== */
+.tax{background:var(--surface)}
+.tax-inner{max-width:480px;text-align:center}
+.tax-calc{
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:.8rem;
+  margin-top:1.5rem;
+}
+.tax-num{text-align:center}
+.tax-big{font-size:1.6rem;font-weight:700;color:var(--ink);letter-spacing:-.03em}
+.tax-lbl{font-size:.62rem;color:var(--ink-50);margin-top:.15rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.tax-arrow{color:var(--ink-30);font-size:1rem;transform:rotate(90deg)}
+
+/* ========== FAQ ========== */
+.faq-inner{max-width:600px}
+.faq-list{margin-top:1.5rem}
+.faq-item{border-bottom:1px solid var(--ink-06);padding:1rem 0;cursor:pointer}
+.faq-item:first-child{border-top:1px solid var(--ink-06)}
+.faq-q{
+  font-size:.82rem;font-weight:600;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  letter-spacing:-.01em;
+}
+.faq-q::after{
+  content:'+';font-size:1.2rem;font-weight:300;color:var(--ink-30);
+  flex-shrink:0;transition:transform .25s;
+  width:1.5rem;height:1.5rem;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:var(--ink-06);
+}
+.faq-item.open .faq-q::after{content:'−';background:var(--accent-light);color:var(--accent)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-a{max-height:220px}
+.faq-a p{padding-top:.65rem;font-size:.8rem;color:var(--ink-50);line-height:1.7;font-weight:400}
+
+/* ========== FOOTER ========== */
+.footer{
+  padding:2rem 1.25rem;
+  border-top:1px solid var(--ink-06);
+}
+.footer-inner{
+  max-width:920px;margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;
+  gap:1rem;text-align:center;
+}
+.footer-brand{display:flex;align-items:center;gap:.45rem}
+.footer-brand img{width:22px;height:22px;border-radius:50%;opacity:.4}
+.footer-brand span{font-size:.72rem;color:var(--ink-30);font-weight:500}
+.footer-legal{font-size:.64rem;color:var(--ink-30);line-height:1.9;font-weight:400}
+.footer-legal a{color:var(--ink-50);text-decoration:none;transition:color .15s}
+.footer-legal a:hover{color:var(--ink);text-decoration:underline}
+
+/* ========== TABLET (640px+) ========== */
+@media(min-width:640px){
+  .nav{padding:0 2rem;height:60px}
+  .nav-link{display:block}
+  .hero{padding:2rem;padding-top:80px}
+  .hero-inner{padding-bottom:2rem}
+  .hero h1{font-size:clamp(1.8rem,4vw,2.8rem)}
+  .dcard{padding:1.8rem;max-width:380px}
+  .sec{padding:4.5rem 2rem}
+  .mission-body{flex-direction:row;gap:3rem}
+  .mission-stats{
+    flex-direction:column;flex-wrap:nowrap;gap:1.5rem;
+    border-top:none;padding-top:0;
+    border-left:1px solid var(--ink-06);padding-left:2rem;
+    min-width:200px;
+  }
+  .prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+  .transp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+  .tax-calc{flex-direction:row;gap:2.5rem}
+  .tax-arrow{transform:none}
+  .footer-inner{flex-direction:row;justify-content:space-between;text-align:left}
+  .footer-legal{text-align:right}
+}
+
+/* ========== DESKTOP (960px+) ========== */
+@media(min-width:960px){
+  .nav{padding:0 clamp(2rem,4vw,3.5rem)}
+  .nav-link{display:block}
+  .hero{padding:clamp(2rem,4vw,3.5rem);padding-top:80px}
+  .hero-inner{
+    display:grid;grid-template-columns:1fr 380px;
+    gap:clamp(2.5rem,5vw,5rem);align-items:end;
+    padding-bottom:clamp(1.5rem,3vw,3rem);
+  }
+  .dcard{max-width:none}
+  .sec{padding:clamp(4.5rem,8vw,7rem) clamp(2rem,4vw,3.5rem)}
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero-text,.dcard{
+  animation:fadeUp .7s ease both;
+}
+.dcard{animation-delay:.15s}
+
+.reveal{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ========== SMALL MOBILE ========== */
+@media(max-width:380px){
+  .hero h1{font-size:1.4rem}
+  .stat-num{font-size:1.7rem}
+  .dcard-amt{font-size:.82rem;padding:.55rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a class="nav-brand" href="#">
+    <img src="logo.png" alt="91">
+    <span>Фонд 91</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="#mission">О&nbsp;фонде</a>
+    <a class="nav-link" href="#programs">Направления</a>
+    <a class="nav-link" href="#requisites">Реквизиты</a>
+    <a class="nav-link nav-cta" href="#donate">Поддержать</a>
+  </div>
+</nav>
+
+<section class="hero" id="donate">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-label">Фонд поддержки Школы №&nbsp;91 · Москва</div>
+      <h1>Поддержите школу,<br>в&nbsp;которой рождаются <em>таланты</em></h1>
+      <p class="hero-desc">Родители, выпускники и&nbsp;друзья школы объединились, чтобы сохранить её уникальность и&nbsp;поддержать инициативы учеников.</p>
+    </div>
+    <div class="dcard">
+      <div class="dcard-title">Пожертвовать</div>
+      <div class="dcard-sub">Нецелевое пожертвование на уставные цели Фонда</div>
+      <div class="dcard-freq">
+        <button class="on" onclick="freq(this)">Разово</button>
+        <button onclick="freq(this)">Ежемесячно</button>
+      </div>
+      <div class="dcard-amounts">
+        <button class="dcard-amt" onclick="amt(this)">500&thinsp;₽</button>
+        <button class="dcard-amt on" onclick="amt(this)">1&thinsp;000&thinsp;₽</button>
+        <button class="dcard-amt" onclick="amt(this)">3&thinsp;000&thinsp;₽</button>
+        <button class="dcard-amt" onclick="amt(this)">5&thinsp;000&thinsp;₽</button>
+      </div>
+      <input class="dcard-other" placeholder="Другая сумма" onfocus="document.querySelectorAll('.dcard-amt').forEach(b=>b.classList.remove('on'))">
+      <button class="dcard-go">Пожертвовать</button>
+      <div class="dcard-fine">Перевод средств означает акцепт <a href="#">публичной оферты</a>. НДС не&nbsp;облагается.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec mission reveal" id="mission">
+  <div class="sec-inner">
+    <div class="sec-label">О фонде</div>
+    <h2>Школа&nbsp;91 — одна из&nbsp;старейших<br>и&nbsp;сильнейших школ Москвы</h2>
+    <div class="mission-body">
+      <div class="mission-text">
+        <p>Мы ценим усилия, которые руководители и&nbsp;учителя Школы&nbsp;91 предпринимают для сохранения уникальности школы и&nbsp;используемых ею методов, а&nbsp;также для поиска, поддержания и&nbsp;развития талантов учеников.</p>
+        <p>Фонд зарегистрирован в&nbsp;установленном порядке. Ежегодная отчётность публикуется на&nbsp;сайте и&nbsp;направляется в&nbsp;Министерство юстиции Российской Федерации.</p>
+      </div>
+      <div class="mission-stats">
+        <div>
+          <div class="stat-num">2025</div>
+          <div class="stat-label">Год основания Фонда</div>
+        </div>
+        <div>
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Средств — на уставные цели</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec programs reveal" id="programs">
+  <div class="sec-inner">
+    <div class="sec-label">Направления</div>
+    <h2>На что идут средства</h2>
+    <p class="sec-sub">Органы управления Фонда решают, как распределить средства между направлениями.</p>
+    <div class="prog-grid">
+      <div class="prog">
+        <h3>Образовательные программы</h3>
+        <p>Поддержка олимпиад, конференций, научных кружков и&nbsp;дополнительных образовательных инициатив</p>
+      </div>
+      <div class="prog">
+        <h3>Развитие школьной среды</h3>
+        <p>Улучшение инфраструктуры, учебных пространств и&nbsp;технического оснащения школы</p>
+      </div>
+      <div class="prog">
+        <h3>Проекты учеников</h3>
+        <p>Финансирование исследовательских, творческих и&nbsp;социальных инициатив учеников</p>
+      </div>
+      <div class="prog">
+        <h3>Сообщество выпускников</h3>
+        <p>Развитие сети Alumni — связь поколений, менторство и&nbsp;профессиональная поддержка</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec transparency reveal">
+  <div class="sec-inner">
+    <div class="sec-label">Прозрачность</div>
+    <h2>Открытая отчётность</h2>
+    <p class="sec-sub">Деятельность Фонда прозрачна и&nbsp;подотчётна.</p>
+    <div class="transp-grid">
+      <div class="transp-card">
+        <h3>Минюст</h3>
+        <p>Ежегодная отчётность направляется в&nbsp;Министерство юстиции РФ в&nbsp;соответствии с&nbsp;ФЗ&nbsp;№&nbsp;7</p>
+      </div>
+      <div class="transp-card">
+        <h3>Публичный отчёт</h3>
+        <p>Отчёт о&nbsp;деятельности и&nbsp;использовании средств публикуется на&nbsp;сайте Фонда</p>
+      </div>
+      <div class="transp-card">
+        <h3>Раздельный учёт</h3>
+        <p>Фонд ведёт раздельный бухгалтерский учёт всех поступивших пожертвований</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec reveal" id="requisites">
+  <div class="sec-inner req-inner">
+    <div class="sec-label">Реквизиты</div>
+    <h2>Банковский перевод</h2>
+    <p class="sec-sub">Перевод через мобильный или интернет-банк</p>
+    <div class="req-table">
+      <div class="req-row"><span class="req-k">Получатель</span><span class="req-right"><span class="req-v">Фонд 91</span><button class="req-copy" onclick="copyVal(this)" data-val="Фонд 91"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+      <div class="req-row"><span class="req-k">ИНН</span><span class="req-right"><span class="req-v">9714082742</span><button class="req-copy" onclick="copyVal(this)" data-val="9714082742"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+      <div class="req-row"><span class="req-k">КПП</span><span class="req-right"><span class="req-v">771401001</span><button class="req-copy" onclick="copyVal(this)" data-val="771401001"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+      <div class="req-row"><span class="req-k">Банк</span><span class="req-right"><span class="req-v">АО «Альфа-Банк»</span><button class="req-copy" onclick="copyVal(this)" data-val="АО «Альфа-Банк»"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+      <div class="req-row"><span class="req-k">Расчётный счёт</span><span class="req-right"><span class="req-v">40702810102620017583</span><button class="req-copy" onclick="copyVal(this)" data-val="40702810102620017583"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+      <div class="req-row"><span class="req-k">БИК</span><span class="req-right"><span class="req-v">044525593</span><button class="req-copy" onclick="copyVal(this)" data-val="044525593"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+      <div class="req-row"><span class="req-k">Корр. счёт</span><span class="req-right"><span class="req-v">30101810200000000593</span><button class="req-copy" onclick="copyVal(this)" data-val="30101810200000000593"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+    </div>
+    <div class="req-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+      <span>Назначение платежа: Пожертвование на уставные цели Фонда. НДС не&nbsp;облагается.</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec tax reveal">
+  <div class="sec-inner tax-inner">
+    <div class="sec-label">Налоговый вычет</div>
+    <h2>Верните часть пожертвования</h2>
+    <p class="sec-sub" style="margin:0 auto">Физлица, уплачивающие НДФЛ, могут получить вычет до&nbsp;25% от&nbsp;суммы. Сохраните платёжный документ.</p>
+    <div class="tax-calc">
+      <div class="tax-num"><div class="tax-big">10&thinsp;000&thinsp;₽</div><div class="tax-lbl">пожертвование</div></div>
+      <div class="tax-arrow">→</div>
+      <div class="tax-num"><div class="tax-big">1&thinsp;300&thinsp;₽</div><div class="tax-lbl">возврат 13%</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec reveal" id="faq">
+  <div class="sec-inner faq-inner">
+    <div class="sec-label">Вопросы</div>
+    <h2>Частые вопросы</h2>
+    <div class="faq-list">
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Куда именно пойдут мои деньги?</div>
+        <div class="faq-a"><p>Пожертвование является нецелевым. Органы управления Фонда решают, как распределить средства между направлениями — поддержкой образовательных инициатив, развитием среды школы и&nbsp;другими уставными задачами.</p></div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Могу ли я получить налоговый вычет?</div>
+        <div class="faq-a"><p>Да. Физические лица, уплачивающие НДФЛ, вправе вернуть часть суммы — до&nbsp;25% годового дохода. Сохраните платёжный документ для подачи в&nbsp;налоговую.</p></div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Есть ли минимальная сумма?</div>
+        <div class="faq-a"><p>Нет. Минимальная сумма пожертвования не&nbsp;установлена.</p></div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Как Фонд отчитывается о&nbsp;расходах?</div>
+        <div class="faq-a"><p>Ежегодная отчётность публикуется на&nbsp;сайте и&nbsp;направляется в&nbsp;Минюст в&nbsp;соответствии с&nbsp;ФЗ&nbsp;№7-ФЗ «О&nbsp;некоммерческих организациях».</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="logo.png" alt="91">
+      <span>Фонд 91 · Москва</span>
+    </div>
+    <div class="footer-legal">
+      ОГРН 1257700467232 · ИНН 9714082742 · ул.&nbsp;Поварская,&nbsp;14<br>
+      <a href="#">Оферта</a> · <a href="#">Устав</a> · <a href="#">Отчётность</a> · Президент: С.&thinsp;Л.&thinsp;Сушко
+    </div>
+  </div>
+</footer>
+
+<script>
+function amt(b){document.querySelectorAll('.dcard-amt').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelector('.dcard-other').value=''}
+function copyVal(btn){navigator.clipboard.writeText(btn.dataset.val);btn.classList.add('copied');setTimeout(()=>btn.classList.remove('copied'),1200)}
+function freq(b){document.querySelectorAll('.dcard-freq button').forEach(x=>x.classList.remove('on'));b.classList.add('on')}
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('solid',scrollY>40)});
+const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el))
+</script>
+</body>
+</html>
